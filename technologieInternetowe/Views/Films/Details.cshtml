@@ -1,0 +1,41 @@
+@model technologieInternetowe.Models.Film
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-film me-2"></i>@Model.Title</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4"><i class="bi bi-person me-1"></i>Reżyser</dt>
+                    <dd class="col-sm-8">@Model.Director</dd>
+
+                    <dt class="col-sm-4"><i class="bi bi-card-text me-1"></i>Opis</dt>
+                    <dd class="col-sm-8">@Model.Desc</dd>
+
+                    <dt class="col-sm-4"><i class="bi bi-tag me-1"></i>Cena</dt>
+                    <dd class="col-sm-8">@(Model.Price.HasValue ? Model.Price.Value.ToString("C") : "—")</dd>
+
+                    <dt class="col-sm-4"><i class="bi bi-tags me-1"></i>Kategoria</dt>
+                    <dd class="col-sm-8">
+                        <a asp-controller="Category" asp-action="Details" asp-route-id="@Model.CategoryId">
+                            @Model.Category?.Name
+                        </a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-transparent d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.FilmId" class="btn btn-outline-secondary">
+                    <i class="bi bi-pencil me-1"></i>Edytuj
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.FilmId" class="btn btn-outline-danger">
+                    <i class="bi bi-trash me-1"></i>Usuń
+                </a>
+                <a asp-action="Index" class="btn btn-outline-primary ms-auto">
+                    <i class="bi bi-arrow-left me-1"></i>Wróć
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

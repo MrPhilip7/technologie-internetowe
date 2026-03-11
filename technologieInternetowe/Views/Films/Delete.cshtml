@@ -1,0 +1,38 @@
+@model technologieInternetowe.Models.Film
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0"><i class="bi bi-trash me-2"></i>Usuń film</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Czy na pewno chcesz usunąć ten film? Tej operacji nie można cofnąć.
+                </div>
+                <dl class="row">
+                    <dt class="col-sm-4">Tytuł</dt>
+                    <dd class="col-sm-8">@Model.Title</dd>
+
+                    <dt class="col-sm-4">Reżyser</dt>
+                    <dd class="col-sm-8">@Model.Director</dd>
+
+                    <dt class="col-sm-4">Kategoria</dt>
+                    <dd class="col-sm-8">@Model.Category?.Name</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-transparent d-flex gap-2">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="FilmId" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Tak, usuń
+                    </button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-1"></i>Anuluj
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

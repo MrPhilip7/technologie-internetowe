@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<Category>
+
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="utf-8" />
@@ -101,8 +103,23 @@
                 @RenderBody()
             </main>
             <footer class="site-footer">
-                <span>&copy; 2026 CineBase</span>
-                <a asp-controller="Home" asp-action="Privacy">Polityka prywatności</a>
+                <div class="footer-left">
+                    🎬 © 2026 CineBase
+                </div>
+                <div class="footer-links">
+                    <a asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-house me-1"></i>Strona główna
+                    </a>
+                    <a asp-controller="Films" asp-action="Index">
+                        <i class="bi bi-camera-video me-1"></i>Filmy
+                    </a>
+                    <a asp-controller="Category" asp-action="Index">
+                        <i class="bi bi-tags me-1"></i>Kategorie
+                    </a>
+                    <a asp-controller="Home" asp-action="Privacy">
+                        <i class="bi bi-shield-lock me-1"></i>Prywatność
+                    </a>
+                </div>
             </footer>
         </div>
     </div>

@@ -1,0 +1,64 @@
+@model technologieInternetowe.Models.Film
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Dodaj film</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label fw-semibold"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Tytuł filmu" />
+                        <span asp-validation-for="Title" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Director" class="form-label fw-semibold"></label>
+                        <input asp-for="Director" class="form-control" placeholder="Imię i nazwisko reżysera" />
+                        <span asp-validation-for="Director" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Desc" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Desc" class="form-control" rows="3" placeholder="Krótki opis..."></textarea>
+                        <span asp-validation-for="Desc" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label fw-semibold"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                            <input asp-for="Price" class="form-control" placeholder="0.00" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="CategoryId" class="form-label fw-semibold">Kategoria</label>
+                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-select">
+                            <option value="">-- Wybierz kategorię --</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>Zapisz
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Anuluj
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

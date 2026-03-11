@@ -1,0 +1,42 @@
+@model technologieInternetowe.Models.Category
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-pencil me-2"></i>Edytuj kategorię</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>Zapisz zmiany
+                        </button>
+                        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Anuluj
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

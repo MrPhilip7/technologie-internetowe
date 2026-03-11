@@ -1,17 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using technologieInternetowe.DAL;
 using technologieInternetowe.Models;
 
 namespace technologieInternetowe.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        FilmsContext db;
+
+        public HomeController(FilmsContext db)
         {
-            return View();
+            this.db = db;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
+        {
+            var categories = db.Categories.ToList();
+
+            return View(categories);
+        }
+
+        public IActionResult FooterSites()
         {
             return View();
         }
