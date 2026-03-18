@@ -66,6 +66,24 @@ body {
     color: #f97316;
 }
 
+.top-navbar-actions {
+    margin-left: auto;
+}
+
+.top-search-form {
+    min-width: 320px;
+}
+
+.top-search-form .input-group {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.top-search-form .form-control:focus {
+    box-shadow: none;
+}
+
 /* =============================================
    PAGE WRAPPER
    ============================================= */
@@ -245,6 +263,22 @@ body {
     padding: 1.75rem;
 }
 
+.home-hero {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid #e6ebf3;
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-card {
+    border: 1px solid #e8edf3;
+    border-radius: 12px;
+}
+
 /* =============================================
    FOOTER
    ============================================= */
@@ -336,6 +370,20 @@ body {
 
     .content-area {
         padding: 1rem;
+    }
+
+    .top-search-form {
+        min-width: 180px;
+    }
+
+    .top-search-form button {
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
+    }
+
+    .home-hero {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 

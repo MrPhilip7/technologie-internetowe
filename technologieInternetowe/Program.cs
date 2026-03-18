@@ -4,7 +4,10 @@ using technologieInternetowe.DAL;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+});
 
 builder.Services.AddDbContext<FilmsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("localDB")));

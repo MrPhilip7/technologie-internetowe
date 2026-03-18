@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using technologieInternetowe.DAL;
 using technologieInternetowe.Models;
 
@@ -7,21 +7,34 @@ namespace technologieInternetowe.Controllers
 {
     public class HomeController : Controller
     {
-        FilmsContext db;
+        private readonly FilmsContext _db;
 
         public HomeController(FilmsContext db)
         {
-            this.db = db;
+            _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = db.Categories.ToList();
+            var model = new HomeDashboardViewModel
+            {
+                FilmsCount = await _db.Films.CountAsync(),
+                CategoriesCount = await _db.Categories.CountAsync(),
+                LatestFilms = await _db.Films
+                    .Include(f => f.Category)
+                    .OrderByDescending(f => f.FilmId)
+                    .Take(6)
+                    .ToListAsync(),
+                Categories = await _db.Categories
+                    .OrderBy(c => c.Name)
+                    .ToListAsync()
+            };
 
-            return View(categories);
+            ViewData["Title"] = "Strona główna";
+            return View(model);
         }
 
-        public IActionResult FooterSites()
+        public IActionResult Privacy()
         {
             return View();
         }
