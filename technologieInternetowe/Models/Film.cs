@@ -11,9 +11,13 @@
             [Required(ErrorMessage = "Nie podano tytułu")]
             public string Title { get; set; } = string.Empty;
 
-            public string? Director { get; set; }
+            public string Director { get; set; } = string.Empty;
 
-            public string? Desc { get; set; }
+            public string Desc { get; set; } = string.Empty;
+
+        [Display(Name = "Okładka (URL)")]
+        [Url(ErrorMessage = "Podaj poprawny adres URL")]
+        public string? CoverImageUrl { get; set; }
 
             public decimal? Price { get; set; }
 

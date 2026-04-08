@@ -29,6 +29,10 @@ else
         {
             <div class="col">
                 <div class="card film-card h-100 shadow-sm">
+                    @if (!string.IsNullOrWhiteSpace(film.CoverImageUrl))
+                    {
+                        <img src="@film.CoverImageUrl" class="card-img-top" alt="Okładka: @film.Title" style="height: 280px; object-fit: cover;" />
+                    }
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <h5 class="card-title mb-0">@film.Title</h5>

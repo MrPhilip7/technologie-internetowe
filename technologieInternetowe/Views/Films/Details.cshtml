@@ -7,6 +7,12 @@
                 <h4 class="mb-0"><i class="bi bi-film me-2"></i>@Model.Title</h4>
             </div>
             <div class="card-body">
+                @if (!string.IsNullOrWhiteSpace(Model.CoverImageUrl))
+                {
+                    <div class="mb-4 text-center">
+                        <img src="@Model.CoverImageUrl" class="img-fluid rounded shadow-sm" alt="Okładka: @Model.Title" style="max-height: 420px; object-fit: cover;" />
+                    </div>
+                }
                 <dl class="row">
                     <dt class="col-sm-4"><i class="bi bi-person me-1"></i>Reżyser</dt>
                     <dd class="col-sm-8">@Model.Director</dd>
