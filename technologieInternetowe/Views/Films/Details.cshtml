@@ -31,15 +31,20 @@
                     </dd>
                 </dl>
             </div>
-            <div class="card-footer bg-transparent d-flex gap-2">
+            <div class="card-footer bg-transparent d-flex flex-wrap gap-2">
                 <a asp-action="Edit" asp-route-id="@Model.FilmId" class="btn btn-outline-secondary">
-                    <i class="bi bi-pencil me-1"></i>Edytuj
+                    <i class="bi bi-pencil"></i> Edytuj
                 </a>
                 <a asp-action="Delete" asp-route-id="@Model.FilmId" class="btn btn-outline-danger">
-                    <i class="bi bi-trash me-1"></i>Usuń
+                    <i class="bi bi-trash"></i> Usuń
                 </a>
+                <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.FilmId" method="post" class="m-0 p-0">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i> Do koszyka
+                    </button>
+                </form>
                 <a asp-action="Index" class="btn btn-outline-primary ms-auto">
-                    <i class="bi bi-arrow-left me-1"></i>Wróć
+                    <i class="bi bi-arrow-left"></i> Wróć
                 </a>
             </div>
         </div>

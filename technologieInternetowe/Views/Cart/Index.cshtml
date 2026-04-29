@@ -1,0 +1,92 @@
+@model List<technologieInternetowe.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Koszyk";
+}
+
+<h1 class="mb-4">Twój koszyk</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Twój koszyk jest pusty. <a asp-controller="Films" asp-action="Index">Wróć do listy filmów</a> i dodaj coś do koszyka.
+    </div>
+}
+else
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Film</th>
+                            <th class="text-center">Cena</th>
+                            <th class="text-center">Ilość</th>
+                            <th class="text-center">Razem</th>
+                            <th class="text-end">Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @if (!string.IsNullOrEmpty(item.CoverImageUrl))
+                                        {
+                                            <img src="@item.CoverImageUrl" alt="Okładka @item.Title" class="rounded me-3 shadow-sm" style="width: 40px; height: 60px; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light rounded me-3 d-flex justify-content-center align-items-center text-secondary border shadow-sm" style="width: 40px; height: 60px;">
+                                                <i class="bi bi-film fs-5"></i>
+                                            </div>
+                                        }
+                                        <div class="fw-semibold">@item.Title</div>
+                                    </div>
+                                </td>
+                                <td class="text-center">@item.Price.ToString("C")</td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <form asp-action="Decrease" asp-route-id="@item.FilmId" method="post" class="m-0 p-0">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary py-0 px-2">-</button>
+                                        </form>
+                                        <span class="mx-2 fw-bold">@item.Quantity</span>
+                                        <form asp-action="Add" asp-route-id="@item.FilmId" method="post" class="m-0 p-0">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary py-0 px-2">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-semibold">@((item.Price * item.Quantity).ToString("C"))</td>
+                                <td class="text-end">
+                                    <form asp-action="Remove" asp-route-id="@item.FilmId" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i> Usuń
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="3" class="text-end fw-bold">Suma:</td>
+                            <td class="text-center fw-bold fs-5 text-primary">@Model.Sum(i => i.Price * i.Quantity).ToString("C")</td>
+                            <td class="text-end">
+                                <form asp-action="Clear" method="post">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Wyczyść koszyk</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-between">
+        <a asp-controller="Films" asp-action="Index" class="btn btn-outline-primary">Konynuuj zakupy</a>
+        <button class="btn btn-success btn-lg">Przejdź do kasy <i class="bi bi-arrow-right ms-1"></i></button>
+    </div>
+}
