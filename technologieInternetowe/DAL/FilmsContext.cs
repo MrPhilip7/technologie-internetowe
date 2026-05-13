@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using technologieInternetowe.Models;
 
 namespace technologieInternetowe.DAL
 {
-    public class FilmsContext : DbContext
+    public class FilmsContext : IdentityDbContext
     {
         public DbSet<Film> Films { get; set; }
         public DbSet<Category> Categories { get; set; }

@@ -32,12 +32,15 @@
                 </dl>
             </div>
             <div class="card-footer bg-transparent d-flex flex-wrap gap-2">
-                <a asp-action="Edit" asp-route-id="@Model.FilmId" class="btn btn-outline-secondary">
-                    <i class="bi bi-pencil"></i> Edytuj
-                </a>
-                <a asp-action="Delete" asp-route-id="@Model.FilmId" class="btn btn-outline-danger">
-                    <i class="bi bi-trash"></i> Usuń
-                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.FilmId" class="btn btn-outline-secondary">
+                        <i class="bi bi-pencil"></i> Edytuj
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.FilmId" class="btn btn-outline-danger">
+                        <i class="bi bi-trash"></i> Usuń
+                    </a>
+                }
                 <form asp-controller="Cart" asp-action="Add" asp-route-id="@Model.FilmId" method="post" class="m-0 p-0">
                     <button type="submit" class="btn btn-success">
                         <i class="bi bi-cart-plus"></i> Do koszyka

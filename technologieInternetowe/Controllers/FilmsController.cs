@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace technologieInternetowe.Controllers
             return View(film);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Title"] = "Dodaj film";
@@ -43,6 +45,7 @@ namespace technologieInternetowe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Film film)
         {
             if (ModelState.IsValid)
@@ -56,6 +59,7 @@ namespace technologieInternetowe.Controllers
             return View(film);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var film = await _context.Films.FindAsync(id);
@@ -67,6 +71,7 @@ namespace technologieInternetowe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, Film film)
         {
             if (id != film.FilmId) return NotFound();
@@ -81,6 +86,7 @@ namespace technologieInternetowe.Controllers
             return View(film);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var film = await _context.Films.Include(f => f.Category).FirstOrDefaultAsync(f => f.FilmId == id);
@@ -91,6 +97,7 @@ namespace technologieInternetowe.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var film = await _context.Films.FindAsync(id);

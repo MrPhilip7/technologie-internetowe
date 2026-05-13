@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using technologieInternetowe.DAL;
@@ -5,6 +6,7 @@ using technologieInternetowe.Models;
 
 namespace technologieInternetowe.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly FilmsContext _context;

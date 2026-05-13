@@ -39,14 +39,18 @@
                     <i class="bi bi-camera-video me-1"></i>
                     <span class="d-none d-md-inline">Filmy</span>
                 </a>
-                <a class="top-nav-link" asp-controller="Category" asp-action="Index">
-                    <i class="bi bi-tags me-1"></i>
-                    <span class="d-none d-md-inline">Kategorie</span>
-                </a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="top-nav-link" asp-controller="Category" asp-action="Index">
+                        <i class="bi bi-tags me-1"></i>
+                        <span class="d-none d-md-inline">Kategorie</span>
+                    </a>
+                }
                 <a class="top-nav-link text-warning position-relative" asp-controller="Cart" asp-action="Index">
                     <i class="bi bi-cart3 fs-5"></i>
                     <span class="d-none d-md-inline ms-1">Koszyk</span>
                 </a>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -74,29 +78,33 @@
                         <span>Filmy</span>
                     </a>
                 </li>
-                <li>
-                    <a asp-controller="Films" asp-action="Create">
-                        <i class="bi bi-plus-circle"></i>
-                        <span>Dodaj film</span>
-                    </a>
-                </li>
+                @if(User.IsInRole("Admin")){
+                    <li>
+                        <a asp-controller="Films" asp-action="Create">
+                            <i class="bi bi-plus-circle"></i>
+                            <span>Dodaj film</span>
+                        </a>
+                    </li>
+                }
             </ul>
 
-            <div class="sidebar-section-label">Biblioteka</div>
-            <ul class="sidebar-nav">
-                <li>
-                    <a asp-controller="Category" asp-action="Index">
-                        <i class="bi bi-tags"></i>
-                        <span>Kategorie</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Category" asp-action="Create">
-                        <i class="bi bi-folder-plus"></i>
-                        <span>Dodaj kategorię</span>
-                    </a>
-                </li>
-            </ul>
+            @if(User.IsInRole("Admin")){
+                <div class="sidebar-section-label">Biblioteka</div>
+                <ul class="sidebar-nav">
+                    <li>
+                        <a asp-controller="Category" asp-action="Index">
+                            <i class="bi bi-tags"></i>
+                            <span>Kategorie</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Create">
+                            <i class="bi bi-folder-plus"></i>
+                            <span>Dodaj kategorię</span>
+                        </a>
+                    </li>
+                </ul>
+            }
 
             <div class="sidebar-footer">
                 <a asp-controller="Home" asp-action="Privacy">
